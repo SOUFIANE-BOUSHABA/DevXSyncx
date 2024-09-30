@@ -1,4 +1,6 @@
 package com.example.devxsyncx;
+
+
 import java.io.*;
 
 import jakarta.persistence.EntityManagerFactory;
