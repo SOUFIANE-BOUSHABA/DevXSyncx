@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -19,11 +20,16 @@ public class LoginServlet extends HttpServlet {
     public void init() throws ServletException {
         userService = new UserService();
     }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        if (session != null && session.getAttribute("user") != null) {
+            resp.sendRedirect("profile");
+            return;
+        }
         req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,8 +38,9 @@ public class LoginServlet extends HttpServlet {
 
         User user = userService.login(username, password);
         if (user != null) {
-            req.getSession().setAttribute("user", user);
-            resp.sendRedirect("index.jsp");
+            HttpSession session = req.getSession();
+            session.setAttribute("user", user);
+            resp.sendRedirect("profile");
         } else {
             req.setAttribute("errorMessage", "Invalid username or password");
             req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
