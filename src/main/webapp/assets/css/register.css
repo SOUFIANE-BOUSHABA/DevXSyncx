@@ -5,12 +5,13 @@ body {
 
 .container {
     display: flex;
-    height: 80vh;
+    height: 91vh;
 
 }
 
 .row {
     display: flex;
+    height: 90vh;
     padding: 0 30px 30px 30px;
     width: 100%;
     margin: 30px;
@@ -19,7 +20,9 @@ body {
 }
 
 .left-side {
-    padding: 50px;
+    height: 80%;
+    margin-top: 100px;
+   padding: 50px;
     background-color: #fff;
     display: flex;
     flex-direction: column;
