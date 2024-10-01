@@ -31,11 +31,11 @@ public class User implements Serializable {
     @Column(name = "user_type")
     private UserType userType;
 
-    // Default constructor
+
     public User() {
     }
 
-    // Parameterized constructor
+
     public User(Long id, String username, String password, String firstName, String lastName, String email, UserType userType) {
         this.id = id;
         this.username = username;
@@ -46,7 +46,7 @@ public class User implements Serializable {
         this.userType = userType;
     }
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }
