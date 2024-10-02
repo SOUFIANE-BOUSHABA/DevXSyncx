@@ -6,4 +6,5 @@ public interface UserRepository {
     User findByUsername(String username);
     void save(User user);
     void deleteByUsername(String username);
+    void update(User user);
 }

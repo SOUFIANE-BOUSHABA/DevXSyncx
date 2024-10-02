@@ -41,4 +41,22 @@ public class UserService {
     }
 
 
+    public boolean updateUser(User user, String firstName, String lastName, String email, String currentPassword, String newPassword) {
+        if (user.getPassword().equals(currentPassword)) {
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setEmail(email);
+
+            if (newPassword != null && !newPassword.isEmpty()) {
+                user.setPassword(newPassword);
+            }
+
+            userRepository.update(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

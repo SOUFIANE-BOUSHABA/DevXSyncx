@@ -57,4 +57,17 @@ public class UserRepositoryImpl implements UserRepository {
             entityManager.close();
         }
     }
+
+
+    @Override
+    public void update(User user) {
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.merge(user);
+            entityManager.getTransaction().commit();
+        } finally {
+            entityManager.close();
+        }
+    }
 }

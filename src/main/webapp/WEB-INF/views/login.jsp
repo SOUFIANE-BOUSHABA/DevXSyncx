@@ -52,7 +52,7 @@
         });
         Toast.fire({
             icon: "success",
-            title: "Your account has been created successfully. Now you can login."
+            title: "account created successfully. Now you can login."
         });
     }
 </script>
