@@ -55,7 +55,7 @@ public class RegistrationServlet extends HttpServlet {
         user.setUserType(UserType.USER);
 
         if (userService.register(user)) {
-            resp.sendRedirect("login");
+            resp.sendRedirect("login?registered=true");
         } else {
             req.setAttribute("WEB-INF/views/errorMessage", "username  exists");
             req.getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req, resp);

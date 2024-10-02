@@ -25,4 +25,35 @@
 </div>
 
 <link rel="stylesheet" href="assets/css/login.css">
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function getQueryParams() {
+        const params = {};
+        window.location.search.substring(1).split("&").forEach(pair => {
+            const [key, value] = pair.split("=");
+            params[key] = decodeURIComponent(value);
+        });
+        return params;
+    }
+
+    const params = getQueryParams();
+    if (params.registered === "true") {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+        Toast.fire({
+            icon: "success",
+            title: "Your account has been created successfully. Now you can login."
+        });
+    }
+</script>
 </body>
