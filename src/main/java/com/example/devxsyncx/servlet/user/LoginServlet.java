@@ -1,4 +1,4 @@
-package com.example.devxsyncx.servlet;
+package com.example.devxsyncx.servlet.user;
 
 import com.example.devxsyncx.entities.User;
 import com.example.devxsyncx.service.UserService;

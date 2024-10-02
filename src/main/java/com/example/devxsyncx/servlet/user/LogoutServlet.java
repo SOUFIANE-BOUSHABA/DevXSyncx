@@ -1,4 +1,4 @@
-package com.example.devxsyncx.servlet;
+package com.example.devxsyncx.servlet.user;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
