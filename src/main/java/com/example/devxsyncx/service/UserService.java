@@ -31,4 +31,14 @@ public class UserService {
     }
 
 
+    public boolean checkPassword(String username, String password) {
+        User user = userRepository.findByUsername(username);
+        return user != null && user.getPassword().equals(password);
+    }
+
+    public void deleteUserByUsername(String username) {
+        userRepository.deleteByUsername(username);
+    }
+
+
 }

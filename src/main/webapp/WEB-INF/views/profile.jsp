@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +8,8 @@
     <link rel="stylesheet" href="assets/css/profile.css">
 </head>
 <body>
-<div class="container">
+<%@ include file="shared/_header.jsp" %>
+<div class="container" style="margin-top: 50px">
     <div class="main-body">
         <div class="row">
             <div class="col-lg-4">
@@ -24,6 +24,8 @@
                                 <form action="logout" method="post">
                                     <button type="submit" class="btn btn-danger">Logout</button>
                                 </form>
+                                <!-- Delete Account Button -->
+                                <button class="btn btn-danger mt-3" data-toggle="modal" data-target="#deleteAccountModal">Delete Account</button>
                             </div>
                         </div>
                         <hr class="my-4">
@@ -32,7 +34,6 @@
                                 <h6 class="mb-0">Email</h6>
                                 <span class="text-secondary">${user.email}</span>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -43,10 +44,18 @@
                         <h5 class="mb-4">User Details</h5>
                         <div class="row mb-3">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">Full Name</h6>
+                                <h6 class="mb-0">First Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                                <input type="text" class="form-control" value="${user.firstName} ${user.lastName}" readonly>
+                                <input type="text" class="form-control" value="${user.firstName}" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Last Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input type="text" class="form-control" value="${user.lastName}" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -57,7 +66,6 @@
                                 <input type="text" class="form-control" value="${user.email}" readonly>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="row">
@@ -69,7 +77,14 @@
                                 <div class="progress mb-3" style="height: 5px">
                                     <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-
+                                <p>Web dev</p>
+                                <div class="progress mb-3" style="height: 5px">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <p>Mobile dev</p>
+                                <div class="progress mb-3" style="height: 5px">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -78,6 +93,35 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="UserServlet?action=delete" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAccountModalLabel">Delete Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="password">Enter your password to confirm:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <input type="hidden" name="username" value="${user.username}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

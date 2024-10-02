@@ -11,31 +11,50 @@ import jakarta.persistence.Persistence;
 public class UserRepositoryImpl implements UserRepository {
 
     private EntityManagerFactory emf;
-    private EntityManager entityManager;
 
     public UserRepositoryImpl() {
         this.emf = Persistence.createEntityManagerFactory("myJPAUnit");
-        this.entityManager = emf.createEntityManager();
     }
 
     @Override
     public User findByUsername(String username) {
-
+        EntityManager entityManager = emf.createEntityManager();
         try {
             return entityManager.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
                     .setParameter("username", username)
                     .getSingleResult();
         } catch (NoResultException e) {
             return null;
+        } finally {
+            entityManager.close();
         }
     }
 
     @Override
     public void save(User user) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(user);
-        entityManager.getTransaction().commit();
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(user);
+            entityManager.getTransaction().commit();
+        } finally {
+            entityManager.close();
+        }
     }
 
-
+    @Override
+    public void deleteByUsername(String username) {
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            entityManager.getTransaction().begin();
+            User user = findByUsername(username);
+            if (user != null) {
+                user = entityManager.merge(user);
+                entityManager.remove(user);
+            }
+            entityManager.getTransaction().commit();
+        } finally {
+            entityManager.close();
+        }
+    }
 }
