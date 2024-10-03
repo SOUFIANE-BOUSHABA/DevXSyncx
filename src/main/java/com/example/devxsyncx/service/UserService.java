@@ -5,6 +5,8 @@ import com.example.devxsyncx.repository.UserRepository;
 import com.example.devxsyncx.repository.impl.UserRepositoryImpl;
 import jakarta.ejb.Stateless;
 
+import java.util.List;
+
 @Stateless
 public class UserService {
 
@@ -56,6 +58,17 @@ public class UserService {
         } else {
             return false;
         }
+    }
+
+
+
+    public List<User> getAllUsers(){
+        return userRepository.getAllUsers();
+    }
+
+
+    public User getUserById(Long id){
+        return userRepository.getUserById(id);
     }
 
 

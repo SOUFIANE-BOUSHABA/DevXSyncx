@@ -42,7 +42,9 @@
           <a class="nav-link" href="users">Users</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="tasks">Tasks</a>
+          <form action="tasks" method="get">
+            <button type="submit" >tasks</button>
+          </form>
         </li>
       </ul>
       <a class="nav-link profile-link" href="profile">Profile</a>

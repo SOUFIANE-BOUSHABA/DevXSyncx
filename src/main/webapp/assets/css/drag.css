@@ -1,0 +1,32 @@
+.board {
+    width: 100%;
+    height: 100vh;
+    background: #f4f4f4;
+}
+
+.lanes {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.swim-lane {
+    width: 300px;
+    min-height: 400px;
+    background: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.task {
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    cursor: move;
+}
+
+.is-dragging {
+    opacity: 0.5;
+}

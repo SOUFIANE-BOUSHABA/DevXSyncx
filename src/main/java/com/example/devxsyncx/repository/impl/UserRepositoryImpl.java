@@ -8,6 +8,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 
+import java.util.List;
+
 public class UserRepositoryImpl implements UserRepository {
 
     private EntityManagerFactory emf;
@@ -66,6 +68,27 @@ public class UserRepositoryImpl implements UserRepository {
             entityManager.getTransaction().begin();
             entityManager.merge(user);
             entityManager.getTransaction().commit();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+
+    @Override
+    public List<User> getAllUsers() {
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            return entityManager.find(User.class, id);
         } finally {
             entityManager.close();
         }
