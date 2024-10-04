@@ -2,6 +2,7 @@ package com.example.devxsyncx.repository.impl;
 
 import com.example.devxsyncx.entities.Tag;
 import com.example.devxsyncx.entities.Task;
+import com.example.devxsyncx.entities.enums.TaskStatus;
 import com.example.devxsyncx.repository.TaskRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -95,4 +96,38 @@ public class TaskRepositoryImpl implements TaskRepository {
             entityManager.close();
         }
     }
+
+
+
+
+
+    @Override
+    public List<Task> findTasksByUser(Long userId) {
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            return entityManager.createQuery(
+                            "SELECT t FROM Task t WHERE t.assignedTo.id = :userId", Task.class)
+                    .setParameter("userId", userId)
+                    .getResultList();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    @Override
+    public List<Task> findTasksByUserAndStatus(Long userId, TaskStatus status) {
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            return entityManager.createQuery(
+                            "SELECT t FROM Task t WHERE t.assignedTo.id = :userId AND t.status = :status", Task.class)
+                    .setParameter("userId", userId)
+                    .setParameter("status", status)
+                    .getResultList();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+
+
 }

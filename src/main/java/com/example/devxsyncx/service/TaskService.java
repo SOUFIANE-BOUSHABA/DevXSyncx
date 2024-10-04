@@ -1,6 +1,7 @@
 package com.example.devxsyncx.service;
 
 import com.example.devxsyncx.entities.Task;
+import com.example.devxsyncx.entities.enums.TaskStatus;
 import com.example.devxsyncx.repository.TaskRepository;
 import com.example.devxsyncx.repository.impl.TaskRepositoryImpl;
 
@@ -42,4 +43,21 @@ public class TaskService {
     public void deleteTask(Long id) {
         taskRepository.delete(id);
     }
+
+
+
+    public List<Task> getPendingTasksForUser(Long userId) {
+        return taskRepository.findTasksByUserAndStatus(userId, TaskStatus.PENDING);
+    }
+
+    public List<Task> getInProgressTasksForUser(Long userId) {
+        return taskRepository.findTasksByUserAndStatus(userId, TaskStatus.IN_PROGRESS);
+    }
+
+    public List<Task> getCompletedTasksForUser(Long userId) {
+        return taskRepository.findTasksByUserAndStatus(userId, TaskStatus.COMPLETED);
+    }
+
+
+
 }
