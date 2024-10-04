@@ -106,9 +106,13 @@ public class TaskServlet extends HttpServlet {
         if (id == null || id.isEmpty()) {
             task = new Task();
             task.setCreatedAt(LocalDateTime.now());
-            task.setDueDate(dueDate);
         } else {
             task = taskService.getTaskById(Long.parseLong(id));
+            if (!dueDate.isAfter(task.getCreatedAt())) {
+                request.setAttribute("errorMessage", "Due date must be after the creation date.");
+                response.sendRedirect("tasks");
+                return;
+            }
         }
 
         task.setTitle(title);
@@ -117,6 +121,8 @@ public class TaskServlet extends HttpServlet {
         task.setCreatedBy(createdBy);
         task.setTags(selectedTags);
         task.setStatus(TaskStatus.PENDING);
+
+        task.setDueDate(dueDate);
 
         if (id == null || id.isEmpty()) {
             taskService.createTask(task);
