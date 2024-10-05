@@ -12,15 +12,14 @@
 </head>
 <body>
 
+<%@ include file="shared/_header.jsp" %>
 <div class="container mt-5">
     <h2>Task List</h2>
 
-    <!-- Add Task Button -->
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">
         Add Task
     </button>
 
-    <!-- Task Table -->
     <table class="table table-striped mt-3">
         <thead>
         <tr>
@@ -43,13 +42,13 @@
             <td><%= task.getAssignedTo().getUsername() %></td>
             <td><%= task.getCreatedBy().getUsername() %></td>
             <td>
-                <!-- Update Button that triggers the task-specific modal -->
+
                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updateModal<%= task.getId() %>">Update</button>
                 <a href="tasks?action=delete&id=<%= task.getId() %>" class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>
 
-        <!-- Modal for updating the task -->
+
         <div class="modal fade" id="updateModal<%= task.getId() %>" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel<%= task.getId() %>" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -119,7 +118,6 @@
     </table>
 
 
-    <!-- Modal for Adding Task -->
     <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -181,7 +179,7 @@
 
 </div>
 
-<!-- JavaScript dependencies -->
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

@@ -6,6 +6,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
+    height: 70px;
   }
 
   .navbar-nav {
@@ -25,6 +26,24 @@
   .nav-link {
     color: #000;
   }
+
+  .nav-item form {
+    display: inline;
+  }
+
+  .nav-item form button {
+    background: none;
+    border: none;
+    color: #000;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .nav-item form button:hover {
+    text-decoration: underline;
+  }
+
 </style>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -43,13 +62,14 @@
         </li>
         <li class="nav-item">
           <form action="tasks" method="get">
-            <button type="submit" >tasks</button>
+            <button type="submit" class="nav-link mt-2">Tasks</button>
           </form>
         </li>
+
       </ul>
       <a class="nav-link profile-link" href="profile">Profile</a>
       <form action="logout" method="post">
-        <button type="submit" class="btn btn-dark">Logout</button>
+        <button type="submit" class="btn btn-dark mt-2">Logout</button>
       </form>
     </div>
   </div>

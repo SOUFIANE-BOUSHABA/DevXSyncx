@@ -6,26 +6,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Jira-Style Task Manager</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaNnYgO7y0UY9YGSCS6Kt6hgB3mno1uTmIq+2gpzYIbX8rHU5awsuZVVFIhv" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"> <!-- Added Bootstrap Icons -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 
     <style>
         .container {
             display: grid;
             place-items: center;
+            text-align: left;
         }
 
         .row {
-            border: 1px solid #d1e7dd;
-            width: 80%;
+            width: 90%;
             display: flex;
             justify-content: space-between;
         }
 
         .swim-lane {
-            width: 250px;
+            width: 300px;
             padding: 20px;
-            border: 2px solid #d1e7dd;
+            border: 2px solid #c6dbd1;
             border-radius: 5px;
             background-color: #f8f9fa;
             transition: background-color 0.3s ease;
@@ -107,81 +108,50 @@
             padding: 20px;
         }
 
-        .task-column {
-            flex: 1;
-            padding: 10px;
-            background-color: #f5f5f5;
-            margin: 0 10px;
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .task-column h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .task-card {
-            background-color: white;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .task-card .status-badge {
-            width: fit-content;
-            padding: 5px 10px;
-            color: white;
-            font-weight: bold;
-            border-radius: 3px;
-            margin-bottom: 10px;
-        }
-
-        .status-badge.todo {
-            background-color: #ffcc00;
-        }
-
-        .status-badge.in-progress {
-            background-color: #00ccff;
-        }
-
-        .status-badge.completed {
-            background-color: #00cc66;
-        }
-        .text-xs{
+        .text-xs {
             font-size: 12px;
             margin-top: 20px;
+        }
+        .dropdown-toggle::after {
+            display: none;
         }
     </style>
 </head>
 <body>
+<%@ include file="shared/_header.jsp" %>
 <div class="container">
-    <h1 class="text-center my-4">Task Management (Jira Style)</h1>
+    <h2 class="text-center my-4 ">Task Management </h2>
     <div class="row">
         <div class="col-md-4">
             <div class="swim-lane" id="todo-lane">
-                <h3 class="heading">TODO</h3>
+                <h4 class="heading">TODO</h4>
                 <%
                     List<Task> pendingTasks = (List<Task>) request.getAttribute("pendingTasks");
                     if (pendingTasks != null) {
                         for (Task task : pendingTasks) { %>
-                <div class="task" draggable="true" data-id="<%= task.getId() %>">
+                <div class="task" draggable="true" data-id="<%= task.getId() %>" style="position: relative;">
                     <span class="badge-status todo"><i class="bi bi-list-task"></i></span>
                     <div class="task-title"><%= task.getTitle() %></div>
                     <div class="task-details"><%= task.getDescription() %></div>
-                    <div class="text-xs mt-2" style="color: #ffc107;"> <%= task.getDueDate() %> <i class="bi bi-clock-history" ></i></div>
+                    <div class="text-xs mt-2" style="color: #ffc107;"> <%= task.getDueDate() %> <i class="bi bi-clock-history"></i></div>
 
+                    <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
+
+                        <a class="btn btn-link text-dark" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="background: #ced4da ; border-radius: 100% ;width: 30px; display: flex; justify-content: center; align-items: center;">
+                            <i class="bi bi-gear"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" href="#">Edit</a></li>
+                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <% } } %>
             </div>
         </div>
         <div class="col-md-4">
             <div class="swim-lane" id="doing-lane">
-                <h3 class="heading">In Progress</h3>
+                <h4 class="heading">In Progress</h4>
                 <%
                     List<Task> inProgressTasks = (List<Task>) request.getAttribute("inProgressTasks");
                     if (inProgressTasks != null) {
@@ -189,14 +159,14 @@
                 <div class="task" draggable="true" data-id="<%= task.getId() %>">
                     <span class="badge-status in-progress"><i class="bi bi-arrow-counterclockwise"></i></span>
                     <div class="task-details"><%= task.getDescription() %></div>
-                    <div class="text-xs mt-2" style="color: #0dcaf0;"> <%= task.getDueDate() %> <i class="bi bi-clock-history" ></i></div>
+                    <div class="text-xs mt-2" style="color: #0dcaf0;"> <%= task.getDueDate() %> <i class="bi bi-clock-history"></i></div>
                 </div>
                 <% } } %>
             </div>
         </div>
         <div class="col-md-4">
             <div class="swim-lane" id="done-lane">
-                <h3 class="heading">Completed</h3>
+                <h4 class="heading">Completed</h4>
                 <%
                     List<Task> completedTasks = (List<Task>) request.getAttribute("completedTasks");
                     if (completedTasks != null) {
@@ -204,13 +174,16 @@
                 <div class="task" draggable="true" data-id="<%= task.getId() %>">
                     <span class="badge-status completed"><i class="bi bi-check-circle"></i></span>
                     <div class="task-details"><%= task.getDescription() %></div>
-                    <div class="text-xs mt-2" style="color: #198754;"> <%= task.getDueDate() %> <i class="bi bi-clock-history" ></i></div>
+                    <div class="text-xs mt-2" style="color: #198754;"> <%= task.getDueDate() %> <i class="bi bi-clock-history"></i></div>
                 </div>
                 <% } } %>
             </div>
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-fzF1qW8g5dEld8rWJkdExM8aBXJEu3SoL4aywYjYf0sWx2n3vO3NlXk6Hy8I/Ri5" crossorigin="anonymous"></script>
 <script>
     const draggables = document.querySelectorAll(".task");
     const droppables = document.querySelectorAll(".swim-lane");
