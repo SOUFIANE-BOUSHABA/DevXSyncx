@@ -129,5 +129,20 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
 
+    @Override
+    public long countTasksByStatusAndUser(TaskStatus status, Long userId) {
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            return (long) entityManager.createQuery(
+                            "SELECT COUNT(t) FROM Task t WHERE t.status = :status AND t.assignedTo.id = :userId")
+                    .setParameter("status", status)
+                    .setParameter("userId", userId)
+                    .getSingleResult();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+
 
 }

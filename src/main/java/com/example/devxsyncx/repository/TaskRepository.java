@@ -16,4 +16,6 @@ public interface TaskRepository {
     List<Task> findTasksByUser(Long userId);
     List<Task> findTasksByUserAndStatus(Long userId, TaskStatus status);
 
+    long countTasksByStatusAndUser(TaskStatus status, Long userId);
+
 }

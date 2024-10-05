@@ -60,4 +60,9 @@ public class TaskService {
 
 
 
+    public long countTasksByStatusAndUser(TaskStatus status, Long userId) {
+        return taskRepository.countTasksByStatusAndUser(status, userId);
+    }
+
+
 }

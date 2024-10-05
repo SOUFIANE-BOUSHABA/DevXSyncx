@@ -141,19 +141,20 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="d-flex align-items-center mb-3">Project Status</h5>
-                                <p>Web Design</p>
+                                <h5 class="d-flex align-items-center mb-3">Task Status</h5>
+                                <p>Completed Task</p>
                                 <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: ${completedTasks / (completedTasks + inProgressTasks + todoTasks) * 100}%" aria-valuenow="${completedTasks}" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <p>Web dev</p>
+                                <p>In Progress Task</p>
                                 <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: ${inProgressTasks / (completedTasks + inProgressTasks + todoTasks) * 100}%" aria-valuenow="${inProgressTasks}" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <p>Mobile dev</p>
+                                <p>Todo Task</p>
                                 <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: ${todoTasks / (completedTasks + inProgressTasks + todoTasks) * 100}%" aria-valuenow="${todoTasks}" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
