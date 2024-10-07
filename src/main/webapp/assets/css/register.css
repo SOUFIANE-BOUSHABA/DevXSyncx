@@ -46,8 +46,7 @@ body {
 }
 
 .form-control {
-    border: none;
-    border-bottom: 1px solid #000000;
+    border: 1px solid #000;
     border-radius: 0;
     box-shadow: none;
     transition: border-bottom 0.3s ease;

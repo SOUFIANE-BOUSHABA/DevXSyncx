@@ -39,8 +39,8 @@
         <tr>
             <td><%= task.getTitle() %></td>
             <td><%= task.getDescription() %></td>
-            <td><%= task.getAssignedTo().getUsername() %></td>
-            <td><%= task.getCreatedBy().getUsername() %></td>
+              <td><%= task.getAssignedTo() != null ? task.getAssignedTo().getUsername() : "N/A" %></td>
+              <td><%= task.getCreatedBy() != null ? task.getCreatedBy().getUsername() : "N/A" %></td>
             <td>
 
                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updateModal<%= task.getId() %>">Update</button>
@@ -76,7 +76,7 @@
                                         List<User> allusers = (List<User>) request.getAttribute("allusers");
                                         if (allusers != null) {
                                             for (User user : allusers) {
-                                                String selected = user.getId().equals(task.getAssignedTo().getId()) ? "selected" : "";
+                                                String selected = (task.getAssignedTo() != null && user.getId().equals(task.getAssignedTo().getId())) ? "selected" : "";
                                                 out.println("<option value=\"" + user.getId() + "\" " + selected + ">" + user.getUsername() + "</option>");
                                             }
                                         }

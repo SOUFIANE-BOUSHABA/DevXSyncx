@@ -141,7 +141,12 @@
                             <i class="bi bi-gear"></i>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" href="#">Edit</a></li>
+                            <li>
+                                <form action="<%= request.getContextPath() %>/editTaskRequest" method="post" style="display:inline;">
+                                    <input type="hidden" name="taskId" value="<%= task.getId() %>">
+                                    <button type="submit" class="dropdown-item">Edit</button>
+                                </form>
+                            </li>
                             <li>
                                 <form action="<%= request.getContextPath() %>/userTasks" method="post" style="display:inline;">
                                     <input type="hidden" name="taskId" value="<%= task.getId() %>">

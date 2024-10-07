@@ -90,12 +90,20 @@ public class TaskRepositoryImpl implements TaskRepository {
             Task task = entityManager.find(Task.class, id);
             if (task != null) {
                 entityManager.remove(task);
+            } else {
+                System.out.println("Task not found with ID: " + id);
             }
             entityManager.getTransaction().commit();
+
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
         } finally {
             entityManager.close();
         }
     }
+
+
 
 
 
