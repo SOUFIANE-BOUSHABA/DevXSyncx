@@ -3,6 +3,8 @@ package com.example.devxsyncx.entities;
 import com.example.devxsyncx.entities.enums.UserType;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -30,6 +32,11 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "user_type")
     private UserType userType;
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Token> tokens = new ArrayList<>();
+
 
 
     public User() {
@@ -101,5 +108,18 @@ public class User implements Serializable {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public List<Token> getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(List<Token> tokens) {
+        this.tokens = tokens;
+    }
+
+    public void addToken(Token token) {
+        token.setUser(this);
+        this.tokens.add(token);
     }
 }

@@ -142,7 +142,12 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <li><a class="dropdown-item" href="#">Edit</a></li>
-                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                            <li>
+                                <form action="<%= request.getContextPath() %>/userTasks" method="post" style="display:inline;">
+                                    <input type="hidden" name="taskId" value="<%= task.getId() %>">
+                                    <button type="submit" class="dropdown-item">Delete</button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </div>

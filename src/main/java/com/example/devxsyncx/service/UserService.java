@@ -1,26 +1,38 @@
 package com.example.devxsyncx.service;
 
+import com.example.devxsyncx.entities.Token;
 import com.example.devxsyncx.entities.User;
+import com.example.devxsyncx.repository.TokenRepository;
 import com.example.devxsyncx.repository.UserRepository;
+import com.example.devxsyncx.repository.impl.TokenRepositoryImpl;
 import com.example.devxsyncx.repository.impl.UserRepositoryImpl;
 import jakarta.ejb.Stateless;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Stateless
 public class UserService {
 
+
     private UserRepository userRepository;
+    private TokenRepository tokenRepository;
 
     public UserService() {
-        this.userRepository = new UserRepositoryImpl(); // Create repository instance
+        this.userRepository = new UserRepositoryImpl();
+        this.tokenRepository = new TokenRepositoryImpl();
     }
 
     public boolean register(User user) {
         if (userRepository.findByUsername(user.getUsername()) != null) {
             return false;
         }
+        Token token = new Token();
+        token.setUser(user);
+        user.addToken(token);
+
         userRepository.save(user);
+
         return true;
     }
 

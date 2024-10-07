@@ -23,22 +23,27 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       HttpSession session = request.getSession();
         String action = request.getParameter("action");
         if ("delete".equals(action)) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             if (userService.checkPassword(username, password)) {
+
                 userService.deleteUserByUsername(username);
+                session.invalidate();
                 response.sendRedirect("login");
+                return;
             } else {
                 response.sendRedirect("profile.jsp?error=Invalid%20password");
             }
         }
 
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+
+
 
         if ("edit".equals(action)) {
+            User user = (User) session.getAttribute("user");
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             String email = request.getParameter("email");
