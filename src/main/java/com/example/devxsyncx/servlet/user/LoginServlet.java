@@ -1,6 +1,7 @@
 package com.example.devxsyncx.servlet.user;
 
 import com.example.devxsyncx.entities.User;
+import com.example.devxsyncx.scheduler.ResetTokenScheduler;
 import com.example.devxsyncx.scheduler.TaskRequestScheduler;
 import com.example.devxsyncx.scheduler.TaskScheduler;
 import com.example.devxsyncx.service.TaskService;
@@ -20,6 +21,7 @@ public class LoginServlet extends HttpServlet {
     private UserService userService;
     private TaskScheduler taskScheduler;
     private TaskRequestScheduler taskRequestScheduler;
+    private ResetTokenScheduler resetTokenScheduler;
 
 
     @Override
@@ -30,6 +32,8 @@ public class LoginServlet extends HttpServlet {
         taskScheduler.start();
         taskRequestScheduler = new TaskRequestScheduler();
         taskRequestScheduler.start();
+        resetTokenScheduler = new ResetTokenScheduler();
+        resetTokenScheduler.start();
     }
 
 

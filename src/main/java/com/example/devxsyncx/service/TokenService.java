@@ -4,6 +4,8 @@ import com.example.devxsyncx.entities.Token;
 import com.example.devxsyncx.repository.TokenRepository;
 import com.example.devxsyncx.repository.impl.TokenRepositoryImpl;
 
+import java.util.List;
+
 public class TokenService {
 
     private final TokenRepository tokenRepository;
@@ -18,5 +20,9 @@ public class TokenService {
 
     public void update(Token token) {
         tokenRepository.update(token);
+    }
+
+    public List<Token> getAllTokens() {
+        return tokenRepository.findAll();
     }
 }

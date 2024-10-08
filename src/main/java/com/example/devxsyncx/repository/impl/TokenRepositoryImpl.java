@@ -6,6 +6,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import java.util.List;
+
 public class TokenRepositoryImpl implements TokenRepository {
 
     private EntityManagerFactory emf;
@@ -48,6 +50,18 @@ public class TokenRepositoryImpl implements TokenRepository {
             entityManager.getTransaction().begin();
             entityManager.merge(token);
             entityManager.getTransaction().commit();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+
+    @Override
+    public List<Token> findAll() {
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            return entityManager.createQuery("SELECT t FROM Token t", Token.class)
+                    .getResultList();
         } finally {
             entityManager.close();
         }
