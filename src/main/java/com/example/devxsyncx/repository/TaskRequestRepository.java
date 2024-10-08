@@ -10,4 +10,6 @@ public interface TaskRequestRepository {
     void save(TaskRequest taskRequest);
     void update(TaskRequest taskRequest);
     void delete(Long id);
+
+    List<TaskRequest> findAll();
 }

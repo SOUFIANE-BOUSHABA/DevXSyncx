@@ -79,7 +79,7 @@ public class TaskRequestRepositoryImpl implements TaskRequestRepository {
             if (taskRequest != null) {
                 entityManager.remove(taskRequest);
             } else {
-                System.out.println("TaskRequest not found with ID: " + id);
+                System.out.println("TaskRequest not found  " + id);
             }
             entityManager.getTransaction().commit();
 
@@ -90,6 +90,16 @@ public class TaskRequestRepositoryImpl implements TaskRequestRepository {
         } finally {
             entityManager.close();
 
+        }
+    }
+
+    @Override
+    public List<TaskRequest> findAll() {
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            return entityManager.createQuery("SELECT tr FROM TaskRequest tr", TaskRequest.class).getResultList();
+        } finally {
+            entityManager.close();
         }
     }
 }

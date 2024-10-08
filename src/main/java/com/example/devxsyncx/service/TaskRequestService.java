@@ -33,4 +33,9 @@ public class TaskRequestService {
     public void delete(Long id) {
         taskRequestRepository.delete(id);
     }
+
+
+    public List<TaskRequest> getAllTasks() {
+        return taskRequestRepository.findAll();
+    }
 }

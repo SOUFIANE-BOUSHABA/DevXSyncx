@@ -1,6 +1,7 @@
 package com.example.devxsyncx.servlet.user;
 
 import com.example.devxsyncx.entities.User;
+import com.example.devxsyncx.scheduler.TaskRequestScheduler;
 import com.example.devxsyncx.scheduler.TaskScheduler;
 import com.example.devxsyncx.service.TaskService;
 import com.example.devxsyncx.service.UserService;
@@ -18,13 +19,17 @@ public class LoginServlet extends HttpServlet {
 
     private UserService userService;
     private TaskScheduler taskScheduler;
+    private TaskRequestScheduler taskRequestScheduler;
 
 
     @Override
     public void init() throws ServletException {
         userService = new UserService();
+
         taskScheduler = new TaskScheduler();
         taskScheduler.start();
+        taskRequestScheduler = new TaskRequestScheduler();
+        taskRequestScheduler.start();
     }
 
 

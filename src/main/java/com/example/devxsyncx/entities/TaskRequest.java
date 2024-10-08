@@ -29,9 +29,12 @@ public class TaskRequest {
     @Column(name = "response_deadline", nullable = false)
     private LocalDateTime responseDeadline;
 
+    @Column(name = "tokens_incremented", nullable = false)
+    private boolean tokensIncremented;
+
     public TaskRequest() {
         this.requestDate = LocalDateTime.now();
-        this.responseDeadline = this.requestDate.plusHours(12);  // Manager must respond within 12 hours
+        this.responseDeadline = this.requestDate.plusHours(12);
     }
 
     public TaskRequest(Task task, User requester, User manager, LocalDateTime requestDate, LocalDateTime responseDeadline) {
@@ -88,5 +91,15 @@ public class TaskRequest {
 
     public void setResponseDeadline(LocalDateTime responseDeadline) {
         this.responseDeadline = responseDeadline;
+    }
+
+
+
+    public boolean isTokensIncremented() {
+        return tokensIncremented;
+    }
+
+    public void setTokensIncremented(boolean tokensIncremented) {
+        this.tokensIncremented = tokensIncremented;
     }
 }
