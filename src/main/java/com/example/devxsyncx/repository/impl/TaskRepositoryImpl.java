@@ -72,15 +72,29 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     @Override
     public void update(Task task) {
+        // Proper declaration of EntityManager inside the method
         EntityManager entityManager = emf.createEntityManager();
         try {
             entityManager.getTransaction().begin();
-            entityManager.merge(task);
+
+            // Ensuring the task is managed before merge
+            if (!entityManager.contains(task)) {
+                task = entityManager.merge(task);
+            }
+
             entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            e.printStackTrace();
         } finally {
-            entityManager.close();
+            // Make sure to always close the entity manager
+            if (entityManager != null) {
+                entityManager.close();
+            }
         }
     }
+
+
 
     @Override
     public void delete(Long id) {

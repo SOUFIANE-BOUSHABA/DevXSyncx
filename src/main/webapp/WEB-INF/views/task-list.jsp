@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.devxsyncx.entities.Tag" %>
 <%@ page import="com.example.devxsyncx.entities.Task" %>
+<%@ page import="com.example.devxsyncx.entities.enums.UserType" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,20 +34,25 @@
         <tbody>
         <%
             List<Task> tasksList = (List<Task>) request.getAttribute("tasks");
+            List<User> allusers = (List<User>) request.getAttribute("allusers");
+
+            User currentUser = (User) session.getAttribute("user");
             if (tasksList != null) {
                 for (Task task : tasksList) {
         %>
+
         <tr>
+
             <td><%= task.getTitle() %></td>
             <td><%= task.getDescription() %></td>
-              <td><%= task.getAssignedTo() != null ? task.getAssignedTo().getUsername() : "N/A" %></td>
-              <td><%= task.getCreatedBy() != null ? task.getCreatedBy().getUsername() : "N/A" %></td>
+            <td><%= task.getAssignedTo() != null ? task.getAssignedTo().getUsername() : "N/A" %></td>
+            <td><%= task.getCreatedBy() != null ? task.getCreatedBy().getUsername() : "N/A" %></td>
             <td>
-
                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#updateModal<%= task.getId() %>">Update</button>
                 <a href="tasks?action=delete&id=<%= task.getId() %>" class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>
+
 
 
         <div class="modal fade" id="updateModal<%= task.getId() %>" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel<%= task.getId() %>" aria-hidden="true">
@@ -73,11 +79,12 @@
                                 <label for="assignedTo<%= task.getId() %>">Assigned To</label>
                                 <select class="form-control" id="assignedTo<%= task.getId() %>" name="assignedTo" required>
                                     <%
-                                        List<User> allusers = (List<User>) request.getAttribute("allusers");
                                         if (allusers != null) {
                                             for (User user : allusers) {
-                                                String selected = (task.getAssignedTo() != null && user.getId().equals(task.getAssignedTo().getId())) ? "selected" : "";
-                                                out.println("<option value=\"" + user.getId() + "\" " + selected + ">" + user.getUsername() + "</option>");
+                                                if (currentUser.getUserType().equals("MANAGER") || user.getId().equals(currentUser.getId())) {
+                                                    String selected = (task.getAssignedTo() != null && user.getId().equals(task.getAssignedTo().getId())) ? "selected" : "";
+                                                    out.println("<option value=\"" + user.getId() + "\" " + selected + ">" + user.getUsername() + "</option>");
+                                                }
                                             }
                                         }
                                     %>
@@ -117,11 +124,10 @@
         </tbody>
     </table>
 
-
     <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-               <form action="tasks" method="POST">
+                <form action="tasks" method="POST">
                     <div class="modal-header">
                         <h5 class="modal-title" id="taskModalLabel">Add New Task</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -140,14 +146,17 @@
                         <div class="form-group">
                             <label for="assignedTo">Assigned To</label>
                             <select class="form-control" id="assignedTo" name="assignedTo" required>
-                                <%
-                                    List<User> allusers = (List<User>) request.getAttribute("allusers");
+                             <%
+                                if (currentUser.getUserType() == UserType.MANAGER) {
                                     if (allusers != null) {
                                         for (User user : allusers) {
                                             out.println("<option value=\"" + user.getId() + "\">" + user.getUsername() + "</option>");
                                         }
                                     }
-                                %>
+                                } else if (currentUser.getUserType() == UserType.USER) {
+                                    out.println("<option value=\"" + currentUser.getId() + "\">" + currentUser.getUsername() + "</option>");
+                                }
+                            %>
                             </select>
                         </div>
                         <div class="form-group">
@@ -178,7 +187,6 @@
     </div>
 
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>

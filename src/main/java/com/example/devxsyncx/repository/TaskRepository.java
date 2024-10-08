@@ -18,4 +18,5 @@ public interface TaskRepository {
 
     long countTasksByStatusAndUser(TaskStatus status, Long userId);
 
+
 }
