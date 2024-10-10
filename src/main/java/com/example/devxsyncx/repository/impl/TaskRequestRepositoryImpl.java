@@ -20,10 +20,24 @@ public class TaskRequestRepositoryImpl implements TaskRequestRepository {
         EntityManager entityManager = emf.createEntityManager();
         try {
             return entityManager.createQuery(
-                            "SELECT tr FROM TaskRequest tr WHERE tr.manager.id = :userId", TaskRequest.class)
+                            "SELECT tr FROM TaskRequest tr WHERE tr.requester.id = :userId", TaskRequest.class)
                     .setParameter("userId", userId)
                     .getResultList();
         } finally {
+            entityManager.close();
+        }
+    }
+
+    @Override
+    public List<TaskRequest>findTaskRequestsByManagerId(Long managerId){
+        EntityManager entityManager = emf.createEntityManager();
+        try{
+            return entityManager.createQuery(
+                    "SELECT tr FROM TaskRequest tr where tr.manager.id = :managerId AND tr.responseDeadline >= CURRENT_TIMESTAMP   ", TaskRequest.class)
+                    .setParameter("managerId", managerId)
+                    .getResultList();
+
+        }finally {
             entityManager.close();
         }
     }

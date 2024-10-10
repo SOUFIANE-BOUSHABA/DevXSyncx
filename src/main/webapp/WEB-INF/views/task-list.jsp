@@ -4,6 +4,14 @@
 <%@ page import="com.example.devxsyncx.entities.Task" %>
 <%@ page import="com.example.devxsyncx.entities.enums.UserType" %>
 
+<%
+    if (session == null || session.getAttribute("user") == null ) {
+
+        response.sendRedirect("login");
+        return;
+
+    }
+%>
 <%@ include file="admin/layout.jsp" %>
 <div class="container ">
     <div class="card shadow-sm">

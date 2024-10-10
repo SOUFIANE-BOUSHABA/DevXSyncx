@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface TaskRequestRepository {
     List<TaskRequest> findTaskRequestsByUserId(Long id);
+    List<TaskRequest> findTaskRequestsByManagerId(Long id);
     TaskRequest findById(Long id);
     void save(TaskRequest taskRequest);
     void update(TaskRequest taskRequest);

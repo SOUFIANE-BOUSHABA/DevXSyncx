@@ -30,8 +30,6 @@ public class LoginServlet extends HttpServlet {
 
         taskScheduler = new TaskScheduler();
         taskScheduler.start();
-        taskRequestScheduler = new TaskRequestScheduler();
-        taskRequestScheduler.start();
         resetTokenScheduler = new ResetTokenScheduler();
         resetTokenScheduler.start();
     }

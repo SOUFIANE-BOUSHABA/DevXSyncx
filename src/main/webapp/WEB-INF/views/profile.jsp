@@ -1,3 +1,11 @@
+<%
+    if (session == null || session.getAttribute("user") == null ) {
+
+        response.sendRedirect("login");
+        return;
+
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>

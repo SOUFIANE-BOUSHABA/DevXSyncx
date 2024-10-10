@@ -6,12 +6,10 @@ import com.example.devxsyncx.repository.TokenRepository;
 import com.example.devxsyncx.repository.UserRepository;
 import com.example.devxsyncx.repository.impl.TokenRepositoryImpl;
 import com.example.devxsyncx.repository.impl.UserRepositoryImpl;
-import jakarta.ejb.Stateless;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Stateless
 public class UserService {
 
 

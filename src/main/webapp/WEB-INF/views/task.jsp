@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.devxsyncx.entities.Task" %>
-<%@ page import="com.example.devxsyncx.entities.enums.TaskStatus" %>
 
 <head>
     <meta charset="UTF-8">
@@ -18,7 +17,7 @@
         }
 
         .row {
-            width: 90%;
+            width: 100%;
             display: flex;
             justify-content: space-between;
         }
@@ -118,7 +117,7 @@
     </style>
 </head>
 <body>
-<%@ include file="shared/_header.jsp" %>
+<%@ include file="admin/layout.jsp" %>
 <div class="container">
     <h2 class="text-center my-4 ">Task Management </h2>
     <div class="row">
@@ -192,6 +191,11 @@
     </div>
 </div>
 
+</section>
+</div>
+</div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-fzF1qW8g5dEld8rWJkdExM8aBXJEu3SoL4aywYjYf0sWx2n3vO3NlXk6Hy8I/Ri5" crossorigin="anonymous"></script>
 <script>
@@ -241,6 +245,7 @@
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
                         console.log("Update successful!");
+                        location.reload();
                     } else {
                         console.error("Update error:", xhr.responseText);
                     }

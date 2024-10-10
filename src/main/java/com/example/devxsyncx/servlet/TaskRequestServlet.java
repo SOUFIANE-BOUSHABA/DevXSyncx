@@ -4,6 +4,7 @@ import com.example.devxsyncx.entities.Task;
 import com.example.devxsyncx.entities.TaskRequest;
 import com.example.devxsyncx.entities.Token;
 import com.example.devxsyncx.entities.User;
+import com.example.devxsyncx.entities.enums.UserType;
 import com.example.devxsyncx.service.TaskRequestService;
 import com.example.devxsyncx.service.TaskService;
 import com.example.devxsyncx.service.TokenService;
@@ -52,8 +53,8 @@ public class TaskRequestServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("user");
-        if (currentUser != null) {
-            List<TaskRequest> taskRequests = taskRequestService.findTaskRequestsByUserId(currentUser.getId());
+        if (currentUser != null  && currentUser.getUserType().equals(UserType.MANAGER)) {
+            List<TaskRequest> taskRequests = taskRequestService.findTaskRequestsByManagerId(currentUser.getId());
             List<User> allusers = userService.getAllUsers();
             request.setAttribute("allusers", allusers);
             request.setAttribute("taskRequests", taskRequests);
@@ -116,11 +117,12 @@ public class TaskRequestServlet extends HttpServlet {
 
     private void handleUpdateTaskRequest(Long taskRequestId, Long newRequesterId) {
         TaskRequest taskRequest = taskRequestService.findById(taskRequestId);
+        Task task = taskRequest.getTask();
         if (taskRequest != null) {
             User newRequester = userService.getUserById(newRequesterId);
             if (newRequester != null) {
-                taskRequest.setRequester(newRequester);
-                taskRequestService.update(taskRequest);
+                task.setAssignedTo(newRequester);
+                taskService.updateTask(task);
                 taskRequestService.delete(taskRequestId);
             }
         }

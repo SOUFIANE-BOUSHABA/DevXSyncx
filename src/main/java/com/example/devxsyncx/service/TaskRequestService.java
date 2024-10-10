@@ -22,6 +22,10 @@ public class TaskRequestService {
         return taskRequestRepository.findTaskRequestsByUserId(id);
     }
 
+    public List<TaskRequest> findTaskRequestsByManagerId(Long id) {
+        return taskRequestRepository.findTaskRequestsByManagerId(id);
+    }
+
     public TaskRequest findById(Long id) {
         return taskRequestRepository.findById(id);
     }
