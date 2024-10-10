@@ -2,18 +2,13 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.devxsyncx.entities.Task" %>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Jira-Style Task Manager</title>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
 
     <style>
-        .container {
+        .container1 {
             display: grid;
             place-items: center;
             text-align: left;
+            width: 100%;
         }
 
         .row {
@@ -89,6 +84,7 @@
             display: block;
             width: 100%;
             margin-top: 10px;
+            border-radius: 20px;
         }
 
         .task-title {
@@ -114,12 +110,56 @@
         .dropdown-toggle::after {
             display: none;
         }
+
+
+        .ezy__travel2_wDNEJ8wr {
+            height: 90px;
+            width: 98%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ezy__travel2_wDNEJ8wr-heading {
+            margin-left: -200px;
+            font-size: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .ezy__travel2_wDNEJ8wr-heading {
+                font-size: 50px;
+            }
+        }
     </style>
 </head>
 <body>
 <%@ include file="admin/layout.jsp" %>
-<div class="container">
-    <h2 class="text-center my-4 ">Task Management </h2>
+<div class="container  container1">
+
+
+    <section
+            class="ezy__travel2_wDNEJ8wr"
+            style="background-image: url(https://cdn.easyfrontend.com/pictures/hero/header35-img.png)"
+    >
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-12 col-lg-7 text-left">
+                    <h6 class="ezy__travel2_wDNEJ8wr-heading mb-2">Task managment</h6>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
     <div class="row">
         <div class="col-md-4">
             <div class="swim-lane" id="todo-lane">
@@ -196,8 +236,7 @@
 </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-fzF1qW8g5dEld8rWJkdExM8aBXJEu3SoL4aywYjYf0sWx2n3vO3NlXk6Hy8I/Ri5" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     const draggables = document.querySelectorAll(".task");
     const droppables = document.querySelectorAll(".swim-lane");

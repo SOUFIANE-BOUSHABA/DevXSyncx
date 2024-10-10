@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link href="assets/css/admin.css" rel="stylesheet">
     <script src="assets/js/admin.js" defer></script>
     <title>Bootstrap Example</title>
@@ -53,8 +55,8 @@
         </aside>
 
         <div class="right" id="right">
-            <header class="">
-                <div class="w-full navv d-flex justify-content-between align-items-center">
+            <header class="" >
+                <div class="w-full navv d-flex justify-content-between align-items-center" style="padding-left:30px ">
 
                     <button class="btn ml-2 btn-light" id="leftBtn" onclick="toggleAside()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
