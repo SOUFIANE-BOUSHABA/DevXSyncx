@@ -180,4 +180,19 @@ public class TaskRepositoryImpl implements TaskRepository {
 
 
 
+    @Override
+    public List<Task> searchTasks(String search) {
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            return entityManager.createQuery(
+                            "SELECT t FROM Task t WHERE t.title LIKE :search OR t.description LIKE :search", Task.class)
+                    .setParameter("search", "%" + search + "%")
+                    .getResultList();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+
+
 }

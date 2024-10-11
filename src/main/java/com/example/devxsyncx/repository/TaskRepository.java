@@ -22,5 +22,7 @@ public interface TaskRepository {
 
     long countTasksByStatusAndManager(TaskStatus status, Long userId);
 
+    List<Task> searchTasks(String search);
+
 
 }

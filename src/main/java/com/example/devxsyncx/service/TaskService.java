@@ -69,4 +69,9 @@ public class TaskService {
         return taskRepository.countTasksByStatusAndManager(status, userId);
     }
 
+
+    public List<Task> searchTasks(String search) {
+        return taskRepository.searchTasks(search);
+    }
+
 }

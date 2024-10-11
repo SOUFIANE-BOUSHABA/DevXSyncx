@@ -39,15 +39,23 @@ public class TaskServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+        String search = request.getParameter("search");
+
         if (action == null || action.equals("list")) {
-            listTasks(request, response);
+            listTasks(request, response , search);
         } else if (action.equals("delete")) {
             deleteTask(request, response);
         }
     }
 
-    private void listTasks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Task> tasks = taskService.getAllTasks();
+    private void listTasks(HttpServletRequest request, HttpServletResponse response , String search) throws ServletException, IOException {
+        List<Task> tasks;
+        if (search != null && !search.trim().isEmpty()) {
+            tasks = taskService.searchTasks(search);
+        } else {
+            tasks = taskService.getAllTasks();
+        }
+
         List<Tag> tags = tagService.getAllTags();
         List<User> allusers = userService.getAllUsers();
 

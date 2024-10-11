@@ -19,6 +19,16 @@
             <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#taskModal">
                 Add Task
             </button>
+
+            <div class="d-flex gap-2" >
+                <form action="tasks" method="GET" class="d-flex gap-4">
+                    <input type="text" class="form-control" name="search" placeholder="Search">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+
+            </div>
+
+
         </div>
 
         <div class="table-responsive p-3 mb-3 bg-body rounded">
