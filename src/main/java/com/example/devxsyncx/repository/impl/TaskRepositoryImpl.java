@@ -72,12 +72,10 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     @Override
     public void update(Task task) {
-        // Proper declaration of EntityManager inside the method
         EntityManager entityManager = emf.createEntityManager();
         try {
             entityManager.getTransaction().begin();
 
-            // Ensuring the task is managed before merge
             if (!entityManager.contains(task)) {
                 task = entityManager.merge(task);
             }
@@ -87,7 +85,6 @@ public class TaskRepositoryImpl implements TaskRepository {
             entityManager.getTransaction().rollback();
             e.printStackTrace();
         } finally {
-            // Make sure to always close the entity manager
             if (entityManager != null) {
                 entityManager.close();
             }
@@ -159,6 +156,22 @@ public class TaskRepositoryImpl implements TaskRepository {
                             "SELECT COUNT(t) FROM Task t WHERE t.status = :status AND t.assignedTo.id = :userId")
                     .setParameter("status", status)
                     .setParameter("userId", userId)
+                    .getSingleResult();
+        } finally {
+            entityManager.close();
+        }
+    }
+
+
+
+    @Override
+    public long countTasksByStatusAndManager(TaskStatus status, Long managerId) {
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            return (long) entityManager.createQuery(
+                            "SELECT COUNT(t) FROM Task t WHERE t.status = :status AND t.createdBy.id = :managerId")
+                    .setParameter("status", status)
+                    .setParameter("managerId", managerId)
                     .getSingleResult();
         } finally {
             entityManager.close();

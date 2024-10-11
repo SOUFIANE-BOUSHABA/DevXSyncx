@@ -151,7 +151,7 @@
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-lg-7 text-left">
-                    <h6 class="ezy__travel2_wDNEJ8wr-heading mb-2">Task managment</h6>
+                    <h2 class=" mb-2" style="margin-left: -150px">Task managment</h2>
 
                 </div>
             </div>
