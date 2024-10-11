@@ -95,6 +95,7 @@ input:focus {
 }
 
 .content{
-    height: 87vh;
+    min-height: 87vh;
+
     background: #f4f5f5;
 }

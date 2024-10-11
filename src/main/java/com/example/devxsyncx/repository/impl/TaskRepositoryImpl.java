@@ -7,8 +7,11 @@ import com.example.devxsyncx.repository.TaskRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TaskRepositoryImpl implements TaskRepository {
@@ -195,4 +198,21 @@ public class TaskRepositoryImpl implements TaskRepository {
 
 
 
+    @Override
+    public List<Task> findTasksBy(TaskStatus status, List<Long> tagIds,Long userId,LocalDateTime startDate,LocalDateTime endDate){
+        EntityManager entityManager = emf.createEntityManager();
+        try {
+            List<Task> tasks = entityManager.createQuery(
+                            "SELECT t FROM Task t JOIN t.tags tag WHERE t.status = :status AND t.createdBy.id = :userId AND tag.id IN :tags AND t.createdAt BETWEEN :startDate AND :endDate", Task.class)
+                    .setParameter("status", status)
+                    .setParameter("userId", userId)
+                    .setParameter("tags", tagIds)
+                    .setParameter("startDate", startDate)
+                    .setParameter("endDate", endDate)
+                    .getResultList();
+            return tasks;
+        } finally {
+            entityManager.close();
+        }
+    }
 }

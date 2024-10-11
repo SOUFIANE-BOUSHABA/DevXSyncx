@@ -3,6 +3,8 @@ package com.example.devxsyncx.repository;
 import com.example.devxsyncx.entities.Task;
 import com.example.devxsyncx.entities.enums.TaskStatus;
 
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 public interface TaskRepository {
@@ -23,6 +25,9 @@ public interface TaskRepository {
     long countTasksByStatusAndManager(TaskStatus status, Long userId);
 
     List<Task> searchTasks(String search);
+
+
+    List<Task> findTasksBy(TaskStatus status,  List<Long> tagIds, Long userId, LocalDateTime startDate, LocalDateTime endDate);
 
 
 }

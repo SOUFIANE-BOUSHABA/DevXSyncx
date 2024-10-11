@@ -5,7 +5,9 @@ import com.example.devxsyncx.entities.enums.TaskStatus;
 import com.example.devxsyncx.repository.TaskRepository;
 import com.example.devxsyncx.repository.impl.TaskRepositoryImpl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TaskService {
@@ -72,6 +74,36 @@ public class TaskService {
 
     public List<Task> searchTasks(String search) {
         return taskRepository.searchTasks(search);
+    }
+
+
+    public long countFilteredTasks(TaskStatus status, Long userId, String[] tags, String period) {
+        LocalDateTime startDate = null;
+        LocalDateTime endDate = LocalDateTime.now();
+
+        if (period != null && !period.isEmpty()) {
+            switch (period) {
+                case "week":
+                    startDate = endDate.minusWeeks(1);
+                    break;
+                case "month":
+                    startDate = endDate.minusMonths(1);
+                    break;
+                case "year":
+                    startDate = endDate.minusYears(1);
+                    break;
+            }
+        }
+
+        List<Long> tagIds = new ArrayList<>();
+            for (String tag : tags) {
+                tagIds.add(Long.parseLong(tag));
+            }
+
+
+
+        List<Task> tasks = taskRepository.findTasksBy(status, tagIds, userId, startDate, endDate);
+        return tasks.size();
     }
 
 }
