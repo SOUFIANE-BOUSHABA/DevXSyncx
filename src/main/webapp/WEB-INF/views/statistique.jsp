@@ -1,60 +1,66 @@
 <%@ include file="admin/layout.jsp" %>
 
+
 <div class="container ">
-    <div class="row">
+    <div class="row task-board">
         <div class="col-md-3">
-            <div class="card text-white bg-primary mb-3">
-                <div class="card-header">Task Todo</div>
+            <div class="ezy__travel2_wDNEJ8wr" style="background-image: url(https://cdn.easyfrontend.com/pictures/hero/header35-img.png); background-color: rgba(0, 123, 255, 0.7);">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h5 class="task-title">Task Todo</h5>
+                    <p class="task-details">
                         <%
                             Long taskTodo = (Long) request.getAttribute("pendingTasks");
                         %>
                         <%= taskTodo %>
-                    </h5>
+                    </p>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card text-white bg-secondary mb-3">
-                <div class="card-header">Task In progress</div>
+            <div class="ezy__travel2_wDNEJ8wr" style="background-image: url(https://cdn.easyfrontend.com/pictures/hero/header35-img.png); background-color: rgba(108, 117, 125, 0.7);">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h5 class="task-title">Task In Progress</h5>
+                    <p class="task-details">
                         <%
                             Long inProgressTasks = (Long) request.getAttribute("inProgressTasks");
                         %>
                         <%= inProgressTasks %>
-                    </h5>
+                    </p>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card text-white bg-success mb-3">
-                <div class="card-header">Task Completed</div>
+            <div class="ezy__travel2_wDNEJ8wr" style="background-image: url(https://cdn.easyfrontend.com/pictures/hero/header35-img.png); background-color: rgba(40, 167, 69, 0.7);">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h5 class="task-title">Task Completed</h5>
+                    <p class="task-details">
                         <%
                             Long completedTasks = (Long) request.getAttribute("completedTasks");
                         %>
                         <%= completedTasks %>
-                    </h5>
+                    </p>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card text-white bg-info mb-3">
-                <div class="card-header">Task OverDue</div>
+            <div class="ezy__travel2_wDNEJ8wr" style="background-image: url(https://cdn.easyfrontend.com/pictures/hero/header35-img.png); background-color: rgba(255, 7, 7, 0.7);">
                 <div class="card-body">
-                    <h5 class="card-title">
+                    <h5 class="task-title">Task Overdue</h5>
+                    <p class="task-details">
                         <%
                             Long overDueTasks = (Long) request.getAttribute("overDueTasks");
                         %>
                         <%= overDueTasks %>
-                    </h5>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+
 
     <div class="row">
         <div class="col-md-12">
@@ -67,6 +73,8 @@
         </div>
     </div>
 </div>
+
+<link rel="stylesheet" href="assets/css/statistique.css">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

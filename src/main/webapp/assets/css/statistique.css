@@ -1,0 +1,32 @@
+.task-board {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.ezy__travel2_wDNEJ8wr {
+    height: 150px;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-body {
+    padding: 15px;
+    text-align: center;
+}
+
+.task-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.task-details {
+    font-size: 16px;
+    margin-top: 10px;
+}
