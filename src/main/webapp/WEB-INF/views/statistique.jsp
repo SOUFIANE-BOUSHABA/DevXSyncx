@@ -63,7 +63,7 @@
     }
 
     .chart {
-        margin-top: -150px;
+        margin-top: -370px;
         width: 100%;
         max-width: 800px;
         margin-left: auto;

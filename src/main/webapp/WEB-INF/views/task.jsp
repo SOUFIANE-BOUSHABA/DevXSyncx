@@ -110,7 +110,25 @@
         .dropdown-toggle::after {
             display: none;
         }
-
+        .datebadge{
+            background-color: #0e0e0d;
+            color: #fff;
+            padding-top: 2px;
+            padding-left: 5px;
+            border-radius: 10px;
+            font-size: 10px;
+            height: 20px;
+            max-width: 100px;
+        }
+        .taskTodo{
+            border: 2px solid #ffb92f;
+        }
+        .taskInpr{
+            border: 2px solid #2f90ff;
+        }
+        .taskDone{
+            border: 2px solid #2fff63;
+        }
 
         .ezy__travel2_wDNEJ8wr {
             height: 90px;
@@ -168,11 +186,10 @@
                     List<Task> pendingTasks = (List<Task>) request.getAttribute("pendingTasks");
                     if (pendingTasks != null) {
                         for (Task task : pendingTasks) { %>
-                <div class="task" draggable="true" data-id="<%= task.getId() %>" style="position: relative;">
-                    <span class="badge-status todo"><i class="bi bi-list-task"></i></span>
+                <div class="task taskTodo" draggable="true" data-id="<%= task.getId() %>" style="position: relative;">
                     <div class="task-title"><%= task.getTitle() %></div>
-                    <div class="task-details"><%= task.getDescription() %></div>
-                    <div class="text-xs mt-2" style="color: #ffc107;"> <%= task.getDueDate() %> <i class="bi bi-clock-history"></i></div>
+                    <div class="task-details text-gray"><%= task.getDescription() %></div>
+                    <div class="text-xs mt-2 datebadge"> <%= task.getDueDate() %> </div>
 
                     <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
 
@@ -205,10 +222,10 @@
                     List<Task> inProgressTasks = (List<Task>) request.getAttribute("inProgressTasks");
                     if (inProgressTasks != null) {
                         for (Task task : inProgressTasks) { %>
-                <div class="task" draggable="true" data-id="<%= task.getId() %>">
-                    <span class="badge-status in-progress"><i class="bi bi-arrow-counterclockwise"></i></span>
-                    <div class="task-details"><%= task.getDescription() %></div>
-                    <div class="text-xs mt-2" style="color: #0dcaf0;"> <%= task.getDueDate() %> <i class="bi bi-clock-history"></i></div>
+                <div class="task taskInpr" draggable="true" data-id="<%= task.getId() %>">
+                    <div class="task-title"><%= task.getTitle() %></div>
+                    <div class="task-details text-gray"><%= task.getDescription() %></div>
+                    <div class="text-xs mt-2  datebadge"> <%= task.getDueDate() %></div>
                 </div>
                 <% } } %>
             </div>
@@ -220,10 +237,10 @@
                     List<Task> completedTasks = (List<Task>) request.getAttribute("completedTasks");
                     if (completedTasks != null) {
                         for (Task task : completedTasks) { %>
-                <div class="task" draggable="true" data-id="<%= task.getId() %>">
-                    <span class="badge-status completed"><i class="bi bi-check-circle"></i></span>
-                    <div class="task-details"><%= task.getDescription() %></div>
-                    <div class="text-xs mt-2" style="color: #198754;"> <%= task.getDueDate() %> <i class="bi bi-clock-history"></i></div>
+                <div class="task taskDone" draggable="true" data-id="<%= task.getId() %>">
+                    <div class="task-title"><%= task.getTitle() %></div>
+                    <div class="task-details text-gray"><%= task.getDescription() %></div>
+                    <div class="text-xs mt-2 datebadge" > <%= task.getDueDate() %></div>
                 </div>
                 <% } } %>
             </div>
