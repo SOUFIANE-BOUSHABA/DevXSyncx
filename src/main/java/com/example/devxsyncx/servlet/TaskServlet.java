@@ -116,7 +116,8 @@ public class TaskServlet extends HttpServlet {
             task.setCreatedAt(LocalDateTime.now());
         } else {
             task = taskService.getTaskById(Long.parseLong(id));
-            if (!dueDate.isAfter(task.getCreatedAt())) {
+            LocalDateTime minDueDate = task.getCreatedAt().plusDays(3);
+            if (!dueDate.isAfter(minDueDate)) {
                 request.setAttribute("errorMessage", "Due date must be after the creation date.");
                 response.sendRedirect("tasks");
                 return;

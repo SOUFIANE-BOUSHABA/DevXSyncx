@@ -69,6 +69,10 @@
         margin-left: auto;
         margin-right: auto;
     }
+    .error-message {
+        color: red;
+        margin-top: 10px;
+    }
 </style>
 
 <div class="container">
@@ -76,7 +80,7 @@
         <div class="col-md-12">
             <div class="card p-3 mb-2">
                 <h5 class="card-title">Filtrer</h5>
-                <form action="statistique" method="POST" class="filter-container">
+                <form action="statistique" method="POST" class="filter-container" onsubmit="return validateForm()">
                     <div class="filter-row">
                         <div class="tags-container">
                             <%
@@ -88,7 +92,9 @@
                                     }
                                 }
                             %>
+                            <div id="error-message" class="error-message" style="display: none;">Please select at least one tag.</div>
                         </div>
+
                         <div class="periode">
                             <select id="period" name="period" class="form-select">
                                 <option value="week" selected>Cette Semaine</option>
@@ -226,6 +232,21 @@
             }
         });
     });
+</script>
+
+<script>
+    function validateForm() {
+        const checkboxes = document.querySelectorAll('.tag-checkbox');
+        const errorMessage = document.getElementById('error-message');
+        for (let checkbox of checkboxes) {
+            if (checkbox.checked) {
+                errorMessage.style.display = 'none';
+                return true;
+            }
+        }
+        errorMessage.style.display = 'block';
+        return false;
+    }
 </script>
 </body>
 </html>
