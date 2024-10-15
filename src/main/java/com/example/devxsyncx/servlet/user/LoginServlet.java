@@ -1,6 +1,8 @@
 package com.example.devxsyncx.servlet.user;
 
 import com.example.devxsyncx.entities.User;
+import com.example.devxsyncx.repository.impl.TokenRepositoryImpl;
+import com.example.devxsyncx.repository.impl.UserRepositoryImpl;
 import com.example.devxsyncx.scheduler.ResetTokenScheduler;
 import com.example.devxsyncx.scheduler.TaskRequestScheduler;
 import com.example.devxsyncx.scheduler.TaskScheduler;
@@ -26,7 +28,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        userService = new UserService();
+        userService = new UserService(new UserRepositoryImpl() , new TokenRepositoryImpl());
 
         taskScheduler = new TaskScheduler();
         taskScheduler.start();

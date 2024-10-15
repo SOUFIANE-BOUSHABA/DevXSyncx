@@ -4,6 +4,8 @@ package com.example.devxsyncx.scheduler;
 import com.example.devxsyncx.entities.TaskRequest;
 import com.example.devxsyncx.entities.Token;
 import com.example.devxsyncx.entities.User;
+import com.example.devxsyncx.repository.impl.TokenRepositoryImpl;
+import com.example.devxsyncx.repository.impl.UserRepositoryImpl;
 import com.example.devxsyncx.service.TaskRequestService;
 import com.example.devxsyncx.service.TokenService;
 import com.example.devxsyncx.service.UserService;
@@ -24,7 +26,7 @@ public class TaskRequestScheduler {
 
     public TaskRequestScheduler() {
         this.taskRequestService = new TaskRequestService();
-        this.userService = new UserService();
+        this.userService = new UserService(new UserRepositoryImpl(), new TokenRepositoryImpl());
         this.tokenService = new TokenService();
 
     }

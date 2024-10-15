@@ -16,9 +16,9 @@ public class UserService {
     private UserRepository userRepository;
     private TokenRepository tokenRepository;
 
-    public UserService() {
-        this.userRepository = new UserRepositoryImpl();
-        this.tokenRepository = new TokenRepositoryImpl();
+    public UserService(UserRepositoryImpl userRepositoryImpl , TokenRepositoryImpl tokenRepository) {
+        this.userRepository =  userRepositoryImpl;
+        this.tokenRepository =  tokenRepository;
     }
 
     public boolean register(User user) {

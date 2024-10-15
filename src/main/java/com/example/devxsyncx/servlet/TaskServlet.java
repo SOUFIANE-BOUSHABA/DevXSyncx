@@ -4,6 +4,8 @@ import com.example.devxsyncx.entities.Task;
 import com.example.devxsyncx.entities.Tag;
 import com.example.devxsyncx.entities.User;
 import com.example.devxsyncx.entities.enums.TaskStatus;
+import com.example.devxsyncx.repository.impl.TokenRepositoryImpl;
+import com.example.devxsyncx.repository.impl.UserRepositoryImpl;
 import com.example.devxsyncx.service.TaskService;
 import com.example.devxsyncx.service.TagService;
 import com.example.devxsyncx.service.UserService;
@@ -33,7 +35,7 @@ public class TaskServlet extends HttpServlet {
     public void init() throws ServletException {
         this.taskService = new TaskService();
         this.tagService = new TagService();
-        this.userService = new UserService();
+        this.userService = new UserService(new UserRepositoryImpl() , new TokenRepositoryImpl());
     }
 
     @Override

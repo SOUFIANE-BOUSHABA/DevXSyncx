@@ -2,6 +2,8 @@ package com.example.devxsyncx.servlet.user;
 
 import com.example.devxsyncx.entities.User;
 import com.example.devxsyncx.entities.enums.UserType;
+import com.example.devxsyncx.repository.impl.TokenRepositoryImpl;
+import com.example.devxsyncx.repository.impl.UserRepositoryImpl;
 import com.example.devxsyncx.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,7 +21,7 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        userService = new UserService();
+        userService = new UserService(new UserRepositoryImpl() , new TokenRepositoryImpl());
     }
 
     @Override

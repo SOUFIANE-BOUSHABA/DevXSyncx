@@ -2,6 +2,8 @@ package com.example.devxsyncx.servlet;
 
 import com.example.devxsyncx.entities.Tag;
 import com.example.devxsyncx.entities.User;
+import com.example.devxsyncx.repository.impl.TokenRepositoryImpl;
+import com.example.devxsyncx.repository.impl.UserRepositoryImpl;
 import com.example.devxsyncx.service.TagService;
 import com.example.devxsyncx.service.UserService;
 import jakarta.servlet.ServletException;
@@ -22,7 +24,7 @@ public class TagsServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         this.tagService = new TagService();
-        this.userService = new UserService();
+        this.userService = new UserService(new UserRepositoryImpl(), new TokenRepositoryImpl());
     }
 
     @Override
