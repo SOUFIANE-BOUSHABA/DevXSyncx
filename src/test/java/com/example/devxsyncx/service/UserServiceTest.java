@@ -48,7 +48,7 @@ class UserServiceTest {
         User user = new User();
         user.setUsername("test");
 
-        when(userRepository.findByUsername("test")).thenReturn(null);
+        when(userRepository.findByUsername("test")).thenReturn(null );
         boolean result = userService.register(user);
 
         assertTrue(result);
@@ -58,25 +58,60 @@ class UserServiceTest {
 
     @Test
     void login() {
+        User user = new User();
+        user.setUsername("test");
+        user.setPassword("password");
+
+        when(userRepository.findByUsername("test")).thenReturn(user);
+        User result = userService.login("test", "password");
+
+        assertEquals(user, result);
+        verify(userRepository, times(1)).findByUsername("test");
     }
 
     @Test
     void checkPassword() {
+        User user = new User();
+        user.setUsername("test");
+        user.setPassword("password");
+
+        when(userRepository.findByUsername("test")).thenReturn(user);
+        boolean result = userService.checkPassword("test", "password");
+
+        assertTrue(result);
+        verify(userRepository, times(1)).findByUsername("test");
     }
 
     @Test
     void deleteUserByUsername() {
-    }
+        String username = "test";
 
-    @Test
-    void updateUser() {
+        doNothing().when(userRepository).deleteByUsername(username);
+        userService.deleteUserByUsername(username);
+
+        verify(userRepository, times(1)).deleteByUsername(username);
     }
 
     @Test
     void getAllUsers() {
+        List<User> users = Arrays.asList(new User(), new User());
+
+        when(userRepository.getAllUsers()).thenReturn(users);
+        List<User> result = userService.getAllUsers();
+
+        assertEquals(users, result);
+        verify(userRepository, times(1)).getAllUsers();
     }
 
     @Test
     void getUserById() {
+        User user = new User();
+        user.setId(1L);
+
+        when(userRepository.getUserById(1L)).thenReturn(user);
+        User result = userService.getUserById(1L);
+
+        assertEquals(user, result);
+        verify(userRepository, times(1)).getUserById(1L);
     }
 }
