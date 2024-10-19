@@ -114,4 +114,7 @@ class UserServiceTest {
         assertEquals(user, result);
         verify(userRepository, times(1)).getUserById(1L);
     }
+
+
+
 }
